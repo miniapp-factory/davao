@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./confetti.css";
 
 export function Confetti() {
   const [confetti, setConfetti] = useState<Array<{ id: number; left: number; color: string }>>([]);
@@ -11,10 +12,12 @@ export function Confetti() {
       color: `hsl(${Math.random() * 360}, 70%, 50%)`,
     }));
     setConfetti(newConfetti);
+    const timer = setTimeout(() => setConfetti([]), 2000);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="confetti-container">
+    <div className="confetti-container fixed inset-0 pointer-events-none">
       {confetti.map(c => (
         <div
           key={c.id}
@@ -22,7 +25,11 @@ export function Confetti() {
           style={{
             left: `${c.left}%`,
             backgroundColor: c.color,
-            animationDelay: `${Math.random() * 0.5}s`,
+            width: "8px",
+            height: "8px",
+            position: "absolute",
+            borderRadius: "50%",
+            animation: "confettiFall 2s linear forwards",
           }}
         />
       ))}
