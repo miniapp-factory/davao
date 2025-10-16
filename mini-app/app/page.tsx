@@ -1,7 +1,6 @@
 "use client";
 
 import { description, title, url } from "@/lib/metadata";
-import { Metadata } from "next";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -9,34 +8,6 @@ import { Progress } from "@/components/ui/progress";
 import { Confetti } from "@/components/ui/confetti";
 
 export const dynamic = "force-dynamic";
-
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    other: {
-      "fc:miniapp": JSON.stringify({
-        version: "next",
-        imageUrl: `${url}/icon.png`,
-        ogTitle: title,
-        ogDescription: description,
-        ogImageUrl: `${url}/icon.png`,
-        button: {
-          title: "Launch Mini App",
-          action: {
-            type: "launch_miniapp",
-            name: title,
-            url: url,
-            splashImageUrl: `${url}/icon.png`,
-            iconUrl: `${url}/icon.png`,
-            splashBackgroundColor: "#000000",
-            description: description,
-            primaryCategory: "utility",
-            tags: [],
-          },
-        },
-      }),
-    },
-  };
-}
 
 const questions = [
   {
@@ -218,7 +189,7 @@ export default function Home() {
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_the_Philippines.svg"
             alt="Philippines flag"
-            className="w-12 h-auto mx-auto mb-4"
+            className="w-12 h-auto mx-0 mb-4"
           />
           <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-[0_0_10px_#FCD116] mb-4">
             Quiz Completed!
