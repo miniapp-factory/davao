@@ -1,33 +1,26 @@
-import { useState, useEffect } from "react";
+import { createConfig, http } from "wagmi";
+import { base } from "wagmi/chains";
+import { useAccount as wagmiUseAccount, useSignMessage as wagmiUseSignMessage, ConnectButton as WagmiConnectButton } from "wagmi";
 
-/**
- * Minimal stub of wagmi hooks and components used in the app.
- * This allows the project to compile without the real wagmi dependency.
- */
+export const wagmiConfig = createConfig({
+  chains: [base],
+  transports: {
+    [base.id]: http("https://mainnet.base.org"),
+  },
+  connectors: [
+    // Default connectors will automatically use WalletConnect and MetaMask
+  ],
+  ssr: false,
+});
 
 export function useAccount() {
-  // In a real app, this would return the connected wallet address and status.
-  // For the stub, we always return disconnected.
-  return { address: null, isConnected: false };
+  return wagmiUseAccount();
 }
 
 export function useSignMessage() {
-  // Returns a function that pretends to sign a message.
-  const signMessageAsync = async ({ message }: { message: string }) => {
-    // Return a dummy signature string.
-    return `0x${Buffer.from(message).toString("hex")}`;
-  };
-  return { signMessageAsync };
+  return wagmiUseSignMessage();
 }
 
 export function ConnectButton() {
-  // Simple button that does nothing in the stub.
-  return (
-    <button
-      className="bg-[#0038A8] text-white py-2 px-4 rounded-full hover:scale-105 transition-transform"
-      onClick={() => alert("Connect wallet functionality is not available in this stub.")}
-    >
-      Connect Wallet
-    </button>
-  );
+  return <WagmiConnectButton />;
 }
