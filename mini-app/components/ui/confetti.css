@@ -1,0 +1,16 @@
+@keyframes confettiFall {
+  0%   { transform: translateY(-100%); opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+.confetti-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.confetti {
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  animation: confettiFall 2s ease-out forwards;
+}
