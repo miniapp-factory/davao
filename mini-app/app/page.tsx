@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Progress } from "@/components/ui/progress";
 import { Confetti } from "@/components/ui/confetti";
 import { Share } from "@/components/ui/share";
-import { useAccount, useSignMessage, ConnectButton } from "wagmi";
+import { useAccount, useSignMessage, ConnectButton } from "@/lib/wagmi";
 import { v4 as uuidv4 } from "uuid";
 
 export const dynamic = "force-dynamic";
