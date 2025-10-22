@@ -1,34 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { useCallback } from "react";
 
 export interface ShareProps {
-  score: number;
   url: string;
 }
 
-export function Share({ score, url }: ShareProps) {
-  const handleShare = useCallback(() => {
-    const shareText = `I scored ${score} out of 10 in the Davao Discovery Quiz! Check it out: ${url}`;
-    if (navigator.share) {
-      navigator
-        .share({
-          title: "Davao Discovery Quiz",
-          text: shareText,
-          url,
-        })
-        .catch((err) => console.error("Share failed:", err));
-    } else {
-      // Fallback: open Twitter intent
-      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-        shareText
-      )}`;
-      window.open(twitterUrl, "_blank");
-    }
-  }, [score, url]);
+export function Share({ url }: ShareProps) {
+  const handleCopy = () => {
+    navigator.clipboard.writeText(url).catch(() => alert("Failed to copy URL"));
+  };
 
-  return (
-    <Button onClick={handleShare} variant="outline" className="mt-4">
-      Share to Farcaster
-    </Button>
-  );
+  return <Button onClick={handleCopy} variant="outline">Copy Quiz Link</Button>;
 }

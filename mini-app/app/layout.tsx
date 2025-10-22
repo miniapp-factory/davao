@@ -1,39 +1,24 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
-import { MiniAppProvider } from "@/components/context/miniapp-provider";
-import { Footer } from "@/components/footer";
+import { Inter } from "next/font/google";
 import { Header } from "@/components/header";
-import { description, title } from "@/lib/metadata";
-import { WagmiConfig } from "wagmi";
-import { wagmiConfig } from "@/lib/wagmi";
 
-const inter = localFont({
-  src: "./InterVariable.ttf",
-});
+const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title,
-  description,
+export const metadata = {
+  title: "Davao Discovery Quiz",
+  description: "Test your knowledge about Davao and the Philippines!",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <WagmiConfig config={wagmiConfig}>
-          <MiniAppProvider>
-            <div className="font-sans min-h-screen flex flex-col place-content-between">
-              <Header />
-              {children}
-              <Footer />
-            </div>
-          </MiniAppProvider>
-        </WagmiConfig>
+        <Header />
+        <main className="container mx-auto py-8">{children}</main>
       </body>
     </html>
   );

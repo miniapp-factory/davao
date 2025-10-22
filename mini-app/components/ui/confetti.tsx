@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./confetti.css";
 
 export function Confetti() {
   const [confetti, setConfetti] = useState<Array<{ id: number; left: number; color: string }>>([]);
@@ -17,11 +16,10 @@ export function Confetti() {
   }, []);
 
   return (
-    <div className="confetti-container fixed inset-0 pointer-events-none">
+    <div className="fixed inset-0 pointer-events-none">
       {confetti.map(c => (
         <div
           key={c.id}
-          className="confetti"
           style={{
             left: `${c.left}%`,
             backgroundColor: c.color,
